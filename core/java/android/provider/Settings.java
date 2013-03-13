@@ -3678,6 +3678,18 @@ public final class Settings {
          */
         public static final String UI_FORCE_OVERFLOW_BUTTON = "ui_force_overflow_button";
 
+        /**
+         * User selected UI Mode
+         * @hide
+         */
+        public static final String USER_UI_MODE = "user_ui_mode";
+
+        /**
+         * Current UI Mode
+         * @hide
+         */
+        public static final String CURRENT_UI_MODE = "current_ui_mode";
+
        /**
         * Whether the UI is in tablet UI
         * @hide
@@ -3718,12 +3730,28 @@ public final class Settings {
         /**
          * @hide
          */
+        public static final String NAVIGATION_BAR_WIDTH_PORT = "navigation_bar_width_port";
+
+        /**
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_WIDTH_LAND = "navigation_bar_width_land";
+
+        /**
+         * @hide
+         */
         public static final String MENU_LOCATION = "menu_location";
 
         /**
          * @hide
          */
         public static final String MENU_VISIBILITY = "menu_visibility";
+
+        /**
+         * If checked hide extra system bar stuff
+         * ie compatmode button and extra ime switcher.
+         */
+        public static final String HIDE_EXTRAS_SYSTEM_BAR = "hide_extras_system_bar";
 
         /**
          * Widgets to show, should be separated by |

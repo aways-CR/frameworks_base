@@ -20,6 +20,7 @@ import com.android.internal.view.RotationPolicy;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.systemui.R;
 
+import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.phone.QuickSettingsModel.BluetoothState;
 import com.android.systemui.statusbar.phone.QuickSettingsModel.RSSIState;
 import com.android.systemui.statusbar.phone.QuickSettingsModel.State;
@@ -81,7 +82,7 @@ import java.util.ArrayList;
 /**
  *
  */
-class QuickSettings {
+public class QuickSettings {
     private static final String TAG = "QuickSettings";
     public static final boolean SHOW_IME_TILE = false;
 
@@ -92,7 +93,8 @@ class QuickSettings {
 
     private DisplayManager mDisplayManager;
     private WifiDisplayStatus mWifiDisplayStatus;
-    private PhoneStatusBar mStatusBarService;
+    private BaseStatusBar mStatusBarService;
+    private PhoneStatusBar mPhoneBarService;
     private BluetoothState mBluetoothState;
 
     private BrightnessController mBrightnessController;
@@ -159,23 +161,31 @@ class QuickSettings {
                 null, null);
     }
 
-    void setBar(PanelBar bar) {
+    public void setBar(PanelBar bar) {
         mBar = bar;
     }
 
-    public void setService(PhoneStatusBar phoneStatusBar) {
-        mStatusBarService = phoneStatusBar;
+    public void setPhoneService(PhoneStatusBar phoneStatusBar) {
+        mPhoneBarService = phoneStatusBar;
     }
 
-    public PhoneStatusBar getService() {
+    public void setService(BaseStatusBar statusBar) {
+        mStatusBarService = statusBar;
+    }
+
+    public BaseStatusBar getService() {
         return mStatusBarService;
+    }
+
+    public PhoneStatusBar getPhoneService() {
+        return mPhoneBarService;
     }
 
     public void setImeWindowStatus(boolean visible) {
         mModel.onImeWindowStatusChanged(visible);
     }
 
-    void setup(NetworkController networkController, BluetoothController bluetoothController,
+    public void setup(NetworkController networkController, BluetoothController bluetoothController,
             BatteryController batteryController, LocationController locationController) {
         mBluetoothController = bluetoothController;
 
@@ -288,7 +298,7 @@ class QuickSettings {
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mContext.startActivityAsUser(intent, new UserHandle(UserHandle.USER_CURRENT));
-        getService().animateCollapsePanels();
+        getPhoneService().animateCollapsePanels();
     }
 
     private void addUserTiles(ViewGroup parent, LayoutInflater inflater) {

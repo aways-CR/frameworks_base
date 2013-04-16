@@ -310,18 +310,8 @@ final class ActivityStack {
         }
     }
 
-    private static final ActivityTrigger mActivityTrigger;
-
     private final PowerManagerService mPm;
     static final ActivityTrigger mActivityTrigger = new ActivityTrigger();
-
-    static {
-        if (SystemProperties.QCOM_HARDWARE) {
-            mActivityTrigger = new ActivityTrigger();
-        } else {
-            mActivityTrigger = null;
-        }
-    }
 
     final Handler mHandler = new Handler() {
         //public Handler() {

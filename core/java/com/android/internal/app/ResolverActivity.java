@@ -49,6 +49,7 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -73,8 +74,8 @@ public class ResolverActivity extends AlertActivity implements AdapterView.OnIte
     private boolean mAlwaysUseOption;
     private boolean mShowExtended;
     private GridView mGrid;
-    private Button mAlwaysButton;
-    private Button mOnceButton;
+    private RadioButton mAlwaysButton;
+    private RadioButton mOnceButton;;
     private CheckBox mAlwaysCheckBox;
     private int mIconDpi;
     private int mIconSize;
@@ -182,8 +183,8 @@ public class ResolverActivity extends AlertActivity implements AdapterView.OnIte
                 if (mUseAltGrid == 1) {
                     mAlwaysCheckBox = (CheckBox) buttonLayout.findViewById(R.id.checkbox_always);
                 } else {
-                    mAlwaysButton = (Button) buttonLayout.findViewById(R.id.button_always);
-                    mOnceButton = (Button) buttonLayout.findViewById(R.id.button_once);
+                    mAlwaysButton = (RadioButton) buttonLayout.findViewById(R.id.button_always);
+                    mOnceButton = (RadioButton) buttonLayout.findViewById(R.id.button_once);
                 }
             } else {
                 mAlwaysUseOption = false;
@@ -267,10 +268,6 @@ public class ResolverActivity extends AlertActivity implements AdapterView.OnIte
             final int checkedPos = mGrid.getCheckedItemPosition();
             final boolean enabled = checkedPos != GridView.INVALID_POSITION;
             mLastSelected = checkedPos;
-            if (mUseAltGrid == 0) {
-                mAlwaysButton.setEnabled(enabled);
-                mOnceButton.setEnabled(enabled);
-            }
             if (enabled) {
                 mGrid.setSelection(checkedPos);
             }
@@ -282,10 +279,6 @@ public class ResolverActivity extends AlertActivity implements AdapterView.OnIte
         final int checkedPos = mGrid.getCheckedItemPosition();
         final boolean hasValidSelection = checkedPos != GridView.INVALID_POSITION;
         if (mAlwaysUseOption && (!hasValidSelection || mLastSelected != checkedPos)) {
-            if (mUseAltGrid == 0) {
-                mAlwaysButton.setEnabled(hasValidSelection);
-                mOnceButton.setEnabled(hasValidSelection);
-            }
             if (hasValidSelection) {
                 if (mUseAltGrid == 1) {
                     startSelected(position,mAlwaysCheckBox.isChecked());
@@ -297,12 +290,6 @@ public class ResolverActivity extends AlertActivity implements AdapterView.OnIte
         } else {
             startSelected(position, false);
         }
-    }
-
-    public void onButtonClick(View v) {
-        final int id = v.getId();
-        startSelected(mGrid.getCheckedItemPosition(), id == R.id.button_always);
-        dismiss();
     }
 
     void startSelected(int which, boolean always) {

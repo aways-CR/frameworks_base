@@ -311,7 +311,6 @@ final class ActivityStack {
     }
 
     private final PowerManagerService mPm;
-    static final ActivityTrigger mActivityTrigger = new ActivityTrigger();
 
     final Handler mHandler = new Handler() {
         //public Handler() {
@@ -1479,7 +1478,9 @@ final class ActivityStack {
 
         if (DEBUG_SWITCH) Slog.v(TAG, "Resuming " + next);
 
-        mActivityTrigger.activityResumeTrigger(next.intent);
+        if (mActivityTrigger != null) {
+            mActivityTrigger.activityResumeTrigger(next.intent);
+        }
 
         // If we are currently pausing an activity, then don't do anything
         // until that is done.
@@ -2493,7 +2494,9 @@ final class ActivityStack {
             final int userId = aInfo != null ? UserHandle.getUserId(aInfo.applicationInfo.uid) : 0;
             Slog.i(TAG, "START u" + userId + " {" + intent.toShortString(true, true, true, false)
                     + "} from pid " + (callerApp != null ? callerApp.pid : callingPid));
-            mActivityTrigger.activityStartTrigger(intent);
+            if (mActivityTrigger != null) {
+                mActivityTrigger.activityStartTrigger(intent);
+            }
         }
 
         ActivityRecord sourceRecord = null;

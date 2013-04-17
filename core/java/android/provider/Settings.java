@@ -3935,6 +3935,12 @@ public final class Settings {
         public static final String MISSED_CALL_BREATH = "missed_call_breath";
 
         /**
+         * Control the level of haptic feedback globally by adjusting vibration multiplier
+         * @hide
+         */
+	public static final String VIBRATION_MULTIPLIER = "vibration_multiplier";
+
+        /**
          * Battery warning preferences
          *
          * 0 = show dialog + play sound (default)

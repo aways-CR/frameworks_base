@@ -165,12 +165,12 @@ public class QuickSettings {
         mBar = bar;
     }
 
-    public void setPhoneService(PhoneStatusBar phoneStatusBar) {
-        mPhoneBarService = phoneStatusBar;
-    }
-
     public void setService(BaseStatusBar statusBar) {
         mStatusBarService = statusBar;
+    }
+
+    public void setPhoneService(PhoneStatusBar phoneStatusBar) {
+        mPhoneBarService = phoneStatusBar;
     }
 
     public BaseStatusBar getService() {
@@ -298,7 +298,7 @@ public class QuickSettings {
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mContext.startActivityAsUser(intent, new UserHandle(UserHandle.USER_CURRENT));
-        getPhoneService().animateCollapsePanels();
+        getPhoneService();
     }
 
     private void addUserTiles(ViewGroup parent, LayoutInflater inflater) {

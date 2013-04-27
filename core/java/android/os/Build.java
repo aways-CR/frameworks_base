@@ -110,6 +110,12 @@ public class Build {
          * a release build.
          */
         public static final String CODENAME = getString("ro.build.version.codename");
+        
+         /**
+          * The current version string that defines the deviant version
+          *  the device is on
+          * /
+          public static final String SLIM = getString("ro.deviant.version");
 
         /**
          * The SDK version to use when accessing resources.

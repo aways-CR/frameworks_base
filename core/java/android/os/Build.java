@@ -115,7 +115,7 @@ public class Build {
           * The current version string that defines the deviant version
           *  the device is on
           * /
-          public static final String SLIM = getString("ro.deviant.version");
+          public static final String DEVIANT = getString("ro.deviant.version");
 
         /**
          * The SDK version to use when accessing resources.
